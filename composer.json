@@ -29,6 +29,13 @@
       "edign8\\Tests\\Laravel\\": "tests/"
     }
   },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "edign8\\Laravel\\Providers\\MacroServiceProvider"
+      ]
+    }
+  },
   "minimum-stability": "dev",
   "prefer-stable": true
 }
