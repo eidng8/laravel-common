@@ -8,7 +8,6 @@
   "license": "MIT",
   "type": "library",
   "require": {
-    "illuminate/database": "^5.6",
     "eidng8/common": "dev-master"
   },
   "require-dev": {
