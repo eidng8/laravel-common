@@ -67,8 +67,11 @@ trait ReadOnly
 
     /**
      * Prevent changing model properties
+     *
+     * @param $key
+     * @param $value
      */
-    public function setAttribute()
+    public function setAttribute($key, $value)
     {
         static::throwReadOnlyException();
     }
@@ -76,8 +79,11 @@ trait ReadOnly
 
     /**
      * Prevent changing model properties
+     *
+     * @param $key
+     * @param $value
      */
-    public function offsetUnset()
+    public function offsetUnset($offset)
     {
         static::throwReadOnlyException();
     }
