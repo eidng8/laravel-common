@@ -47,6 +47,11 @@ trait ReadOnly
                 static::throwReadOnlyException();
             }
         );
+        static::deleting(
+            function () {
+                static::throwReadOnlyException();
+            }
+        );        
     }
 
 
