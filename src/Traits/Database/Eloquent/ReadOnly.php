@@ -32,7 +32,7 @@
 
 namespace edign8\Laravel\Traits\Database\Eloquent;
 
-use edign8\Laravel\Exception\ReadOnlyModelException;
+use edign8\Laravel\Exceptions\ReadOnlyModelException;
 
 /**
  * Makes the model read-only. If the `readonlyDatabase` member property is set
@@ -80,9 +80,10 @@ trait ReadOnly
      */
     public function setAttribute($key, $value)
     {
-        if ($this->readonlyDatabase) {
+        if (!$this->readonlyDatabase) {
             static::throwReadOnlyException();
         }
+        parent::setAttribute($key, $value);
     }
 
 
@@ -95,9 +96,10 @@ trait ReadOnly
      */
     public function offsetSet($offset, $value)
     {
-        if ($this->readonlyDatabase) {
+        if (!$this->readonlyDatabase) {
             static::throwReadOnlyException();
         }
+        parent::offsetSet($offset, $value);
     }
 
 
@@ -109,8 +111,9 @@ trait ReadOnly
      */
     public function offsetUnset($offset)
     {
-        if ($this->readonlyDatabase) {
+        if (!$this->readonlyDatabase) {
             static::throwReadOnlyException();
         }
+        parent::offsetUnset($offset);
     }
 }

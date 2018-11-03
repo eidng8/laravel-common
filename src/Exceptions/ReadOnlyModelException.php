@@ -27,7 +27,7 @@
  *
  */
 
-namespace edign8\Laravel\Exception;
+namespace edign8\Laravel\Exceptions;
 
 class ReadOnlyModelException extends \Exception
 {
