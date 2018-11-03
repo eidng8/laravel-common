@@ -27,64 +27,8 @@
  *
  */
 
-namespace edign8\Laravel\Traits\Database\Eloquent;
+namespace edign8\Laravel\Exception;
 
-use DomainException;
-
-/**
- * Makes the model read-only.
- */
-trait ReadOnly
+class ReadOnlyModelException extends \Exception
 {
-
-    /**
-     * Prevent saving model to database
-     */
-    public static function bootReadOnly()
-    {
-        static::saving(
-            function () {
-                static::throwReadOnlyException();
-            }
-        );
-        static::deleting(
-            function () {
-                static::throwReadOnlyException();
-            }
-        );        
-    }
-
-
-    /**
-     * Throws the read-only exception.
-     * @throws DomainException
-     */
-    public static function throwReadOnlyException()
-    {
-        throw new DomainException('This instance is read only');
-    }
-
-
-    /**
-     * Prevent changing model properties
-     *
-     * @param $key
-     * @param $value
-     */
-    public function setAttribute($key, $value)
-    {
-        static::throwReadOnlyException();
-    }
-
-
-    /**
-     * Prevent changing model properties
-     *
-     * @param $key
-     * @param $value
-     */
-    public function offsetUnset($offset)
-    {
-        static::throwReadOnlyException();
-    }
 }
