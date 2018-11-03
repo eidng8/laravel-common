@@ -69,7 +69,7 @@ class MacrosTest extends TestCase
     }
 
 
-    public function testContrains(): void
+    public function testConstraints(): void
     {
         $query = new Builder($this->app->make(ConnectionInterface::class));
         $query->whereContains('col1', 'val1');
@@ -78,7 +78,7 @@ class MacrosTest extends TestCase
     }
 
 
-    public function testOrContrains(): void
+    public function testOrConstraints(): void
     {
         $query = new Builder($this->app->make(ConnectionInterface::class));
         $query->whereContains('col1', 'val1');
@@ -88,7 +88,7 @@ class MacrosTest extends TestCase
     }
 
 
-    public function testNotContrains(): void
+    public function testNotConstraints(): void
     {
         $query = new Builder($this->app->make(ConnectionInterface::class));
         $query->whereNotContains('col1', 'val1');
@@ -97,7 +97,7 @@ class MacrosTest extends TestCase
     }
 
 
-    public function testOrNotContrains(): void
+    public function testOrNotConstraints(): void
     {
         $query = new Builder($this->app->make(ConnectionInterface::class));
         $query->whereNotContains('col1', 'val1');
