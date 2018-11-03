@@ -27,50 +27,48 @@
  *
  */
 
-/* @noinspection PhpUndefinedMethodInspection */
+namespace eidng8\Tests\Providers;
 
-namespace edign8\Laravel\Providers;
-
-use edign8\Laravel\Database\Query\Builder;
+use edign8\Laravel\Providers\MacroServiceProvider;
 use Illuminate\Http\Request;
-use Illuminate\Support\ServiceProvider;
+use Orchestra\Testbench\TestCase;
 
-class MacroServiceProvider extends ServiceProvider
+class MacrosTest extends TestCase
 {
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot(): void
+    protected function getPackageProviders($app)
     {
-        Builder::macros();
-        $this->requestMacros();
+        return array_merge(
+            parent::getPackageProviders($app),
+            [MacroServiceProvider::class]
+        );
     }
 
 
-    protected function requestMacros(): void
+    public function testRequestBool()
     {
-        Request::macro(
-            'bool',
-            function ($key): bool {
-                return is_yes($this->input($key) ?? false);
-            }
-        );
+        $request = new Request(['a' => 'y', 'b' => null]);
+        self::assertTrue($request->bool('a'));
+        self::assertFalse($request->bool('b'));
+    }
 
-        Request::macro(
-            'csv',
-            function ($key, $default = []): array {
-                $value = $this->input($key) ?? '';
-                if (!$value) {
-                    return $default ?? [];
-                }
-                if (\is_array($value)) {
-                    return $value;
-                }
 
-                return csv_to_array($value);
-            }
-        );
+    public function testRequestCsv()
+    {
+        $request = new Request(['a' => 'a,b,c']);
+        self::assertEquals(['a', 'b', 'c'], $request->csv('a'));
+    }
+
+
+    public function testRequestCsvEmpty()
+    {
+        $request = new Request(['a' => '']);
+        self::assertCount(0, $request->csv('a'));
+    }
+
+
+    public function testRequestCsvArray()
+    {
+        $request = new Request(['a' => [1]]);
+        self::assertSame([1], $request->csv('a'));
     }
 }
