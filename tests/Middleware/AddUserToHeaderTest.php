@@ -27,6 +27,8 @@
  *
  */
 
+namespace eidng8\Tests\Middleware;
+
 use edign8\Laravel\Middleware\AddUserToHeader;
 use Orchestra\Testbench\TestCase;
 

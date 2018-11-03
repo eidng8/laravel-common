@@ -27,6 +27,8 @@
  *
  */
 
+namespace eidng8\Tests\Middleware;
+
 use Illuminate\Http\Request;
 use Orchestra\Testbench\TestCase;
 
