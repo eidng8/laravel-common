@@ -27,7 +27,7 @@
  *
  */
 
-namespace eidng8\Tests;
+namespace eidng8\Tests\Database\Query;
 
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Query\Builder;
