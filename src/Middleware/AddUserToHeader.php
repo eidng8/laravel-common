@@ -27,10 +27,6 @@
  *
  */
 
-/**
- * © 出团去版权所有
- */
-
 namespace edign8\Laravel\Middleware;
 
 /**
