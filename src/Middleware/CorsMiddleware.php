@@ -45,10 +45,10 @@ class CorsMiddleware
         /* @var \Illuminate\Http\Response $response */
         $response = $next($request);
 
-        $response->header(
-            'access-control-allow-origin',
-            $request->header('origin')
-        );
+        $header = $request->header('origin');
+        if ($header) {
+            $response->header('access-control-allow-origin', $header);
+        }
 
         $header = $request->header('access-control-request-method');
         if ($header) {
@@ -58,7 +58,7 @@ class CorsMiddleware
         $header = $request->header('access-control-request-headers');
         if ($header) {
             if (is_array($header)) {
-                $header = implode(', ', $header);
+                $header = implode(', ', array_map('trim', $header));
             }
             $response->header('access-control-allow-headers', $header);
         }
