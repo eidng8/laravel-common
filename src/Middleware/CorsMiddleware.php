@@ -31,6 +31,9 @@ namespace edign8\Laravel\Middleware;
 
 use Closure;
 
+/**
+ * A simple middleware to allow all CORS requests.
+ */
 class CorsMiddleware
 {
     /**
