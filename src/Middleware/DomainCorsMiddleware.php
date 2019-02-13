@@ -50,7 +50,7 @@ class DomainCorsMiddleware extends CorsMiddleware
     public function handle($request, Closure $next)
     {
         $regex = '#^(?:.+://)?(?:.+\.)?([^.]+\.\w+)(?::\d+)?$#';
-        $domain = $_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'];
+        $domain = $_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'] ?? false;
         if (!$domain) {
             // something wrong with the host
             return $this->emptyResponse();
