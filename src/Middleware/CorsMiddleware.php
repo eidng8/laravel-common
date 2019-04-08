@@ -45,8 +45,12 @@ class CorsMiddleware
      */
     public function handle($request, Closure $next)
     {
-        /* @var \Illuminate\Http\Response $response */
-        $response = $next($request);
+        if ('OPTIONS' == $request->method()) {
+            $response = response()->json();
+        } else {
+            /* @var \Illuminate\Http\Response $response */
+            $response = $next($request);
+        }
 
         $header = $request->header('origin');
         if ($header) {
